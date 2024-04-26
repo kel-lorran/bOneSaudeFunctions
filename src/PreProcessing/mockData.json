@@ -1,0 +1,34 @@
+{
+  "sis": [
+    {
+      "CPF": "51622574192",
+      "DOM": "1689346205373",
+      "name": "Harriet Clayton",
+      "gender": "Female"
+    },
+    {
+      "CPF": "22944463055",
+      "DOM": "1672411862548",
+      "name": "Susie Henry",
+      "gender": "Male"
+    },
+    {
+      "CPF": "88898957564",
+      "DOM": "1671202302441",
+      "name": "Austin Ramos",
+      "gender": "Male"
+    }
+  ],
+  "sementedPatients": {
+    "prenatal": {
+      "data": [
+        "51622574192"
+      ]
+    },
+    "postChildbirth": {
+      "data": [
+        "22944463055"
+      ]
+    }
+  }
+}

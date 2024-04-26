@@ -1,0 +1,47 @@
+{
+    "ID": "",
+    "name": "consultas prenatal",
+    "segment": "prenatal",
+    "startCondition": {
+        "type": "gestation",
+        "unit": "week",
+        "value": 0
+    },
+    "stepList": [
+        {
+            "interval": {
+                "unit": "month",
+                "value": 1
+            },
+            "duration": {
+                "unit": "week",
+                "value": 12
+            },
+            "postRef": "",
+            "post": {
+                "ID": "",
+                "title": "consulta de pré-natal",
+                "content": "agende sua consulta de pré-natal com antecedendia, essa é a melhor forma de cuidar do seu bebe",
+                "categoryList": ["forYou", "consulta"]
+            }
+        },
+        {
+            "interval": {
+                "unit": "week",
+                "value": 1
+            },
+            "duration": {
+                "unit": "week",
+                "value": 12
+            },
+            "postRef": "",
+            "post": {
+                "ID": "",
+                "title": "consulta de pré-natal semanal",
+                "content": "agende sua consulta de pré-natal com antecedendia, essa é a melhor forma de cuidar do seu bebe",
+                "categoryList": ["forYou", "consulta"]
+            }
+        }
+    ],
+    "scheduleModel": null
+}
