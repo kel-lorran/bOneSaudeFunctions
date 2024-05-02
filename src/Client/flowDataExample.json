@@ -10,8 +10,8 @@
     "stepList": [
         {
             "interval": {
-                "unit": "month",
-                "value": 1
+                "unit": "week",
+                "value": 4
             },
             "duration": {
                 "unit": "week",

@@ -1,14 +1,14 @@
 import { Post } from "../model/Post";
 
 var admin = require("firebase-admin");
-var Chance = require("chance");
-var chance = new Chance();
 
-var serviceAccount = require("../utils/cert/b-one-saude-firebase-adminsdk-8vmnq-227fedd0ff.json");
+var serviceAccount = require("../utils/cert/credential.json");
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+if (!admin.apps.length) {
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+    });
+}
 
 
 

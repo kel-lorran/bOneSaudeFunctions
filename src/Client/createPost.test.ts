@@ -9,7 +9,7 @@ jest.mock('firebase-admin', () => {
         __esModule: true,
         ...originalModule,
         firestore: jest.fn(),
-        initializeApp: jest.fn()
+        apps: [{}]
     };
 });
 admin as jest.Mock

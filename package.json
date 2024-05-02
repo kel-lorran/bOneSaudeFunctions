@@ -7,7 +7,12 @@
     "test": "jest",
     "createSIS": "ts-node ./src/PreProcessing/createSISData",
     "createSegment": "ts-node ./src/PreProcessing/createSegments",
-    "createPostList": "ts-node ./src/PreProcessing/createPost"
+    "createFlow": "ts-node ./src/Client/runCreateFlow",
+    "createPostList": "ts-node ./src/PreProcessing/createPost",
+    "createPatientSyncSIS": "ts-node ./src/Client/runPatient",
+    "applyScheduleModel": "ts-node ./src/PosProcessing/runApplyScheduleModelByFlow.ts",
+    "createFirestoreBackup": "npx -p node-firestore-import-export firestore-export -a ./src/utils/cert/temp.json -b backup.json",
+    "uploadDataFromBackup": "npx -p node-firestore-import-export firestore-import -a ./src/utils/cert/temp.json -b backup.json"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +22,7 @@
     "@babel/preset-typescript": "^7.24.1",
     "@types/firebase": "^3.2.1",
     "@types/jest": "^29.5.12",
+    "@types/node": "^20.12.7",
     "jest": "^29.7.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
@@ -24,6 +30,7 @@
   "dependencies": {
     "@types/chance": "^1.1.6",
     "chance": "^1.1.11",
-    "firebase-admin": "^12.1.0"
+    "firebase-admin": "^12.1.0",
+    "moment": "^2.30.1"
   }
 }
