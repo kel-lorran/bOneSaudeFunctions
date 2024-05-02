@@ -1,10 +1,11 @@
 import { PatientFlowScheduleModel } from "./PatientFlowScheduleModel"
-import { FlowStep } from "./FlowStep"
 
 export interface Patient {
     ID?: string
+    cpf: string
+    email: string
+    dum?: number
     appTokenList: string[]
-    PatientFlowScheduleModelRef: string[]
-    flowScheduleModel?: PatientFlowScheduleModel
-    scheduleModellIST: FlowStep[][]
+    scheduleModelRefList: string[]
+    scheduleModelList?: PatientFlowScheduleModel[]
 }

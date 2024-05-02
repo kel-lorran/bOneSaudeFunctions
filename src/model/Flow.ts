@@ -1,16 +1,13 @@
-import { FlowStep } from "./FlowStep"
-import { Post } from "./Post"
+import { PatientFlowScheduleModel } from "./PatientFlowScheduleModel"
 import { Step } from "./Step"
+import { Time } from "./Time"
 
 export interface Flow {
     ID?: string,
     name: string,
     segment: string,
-    startCondition: {
-        type: string
-        unit: string
-        value: number
-    }
+    startCondition: Time
     stepList: Step[]
-    scheduleModel: FlowStep[]
+    scheduleModel: PatientFlowScheduleModel
 }
+

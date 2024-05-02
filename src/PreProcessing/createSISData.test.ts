@@ -7,7 +7,7 @@ jest.mock('firebase-admin', () => {
     __esModule: true,
     ...originalModule,
     firestore: jest.fn(),
-    initializeApp: jest.fn()
+    apps: [{}]
   };
 });
 admin as jest.Mock
@@ -25,7 +25,7 @@ describe('createSISData script test', () => {
 
     expect(fakeSetFn).toHaveBeenCalledWith(expect.objectContaining({
       "CPF": expect.any(String),
-      "DOM": expect.any(String),
+      "DUM": expect.any(String),
     }))
     expect(fakeCollectionFn).toHaveBeenCalledWith('sis')
   })

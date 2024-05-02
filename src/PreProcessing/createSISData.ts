@@ -2,24 +2,34 @@ var admin = require("firebase-admin");
 var Chance = require("chance");
 var chance = new Chance();
 
-var serviceAccount = require("../utils/cert/b-one-saude-firebase-adminsdk-8vmnq-227fedd0ff.json");
+var serviceAccount = require("../utils/cert/credential.json");
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+if (!admin.apps.length) {
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+    });
+}
 
-(async (patientQtd = 100) => {
+(async (patientQtd = 10) => {
+  var crypto = require('crypto')
   const dataSIS = Array(patientQtd)
     .fill(undefined)
-    .map(() => ({
-      CPF: chance.cpf().replace(/\D/gi, ""),
-      DOM:
-       ( new Date().getTime() -
-        chance.integer({
-          min: 1000 * 60 * 60 * 24 * 30,
-          max: 1000 * 60 * 60 * 24 * 30 * 12,
-        })).toString(),
-    }));
+    .map(() => {
+      const data = {
+        CPF: chance.cpf().replace(/\D/gi, ""),
+        DUM:
+         ( new Date().getTime() -
+          chance.integer({
+            min: 1000 * 60 * 60 * 24 * 30,
+            max: 1000 * 60 * 60 * 24 * 30 * 12,
+          })).toString(),
+      }
+      
+      return {
+        ...data,
+        snapshot: crypto.createHash('md5').update(JSON.stringify(data)).digest('hex')
+      } 
+    });
     
   return Promise.all(
     dataSIS.map((e) =>

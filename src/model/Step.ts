@@ -1,12 +1,8 @@
+import { Time } from "./Time"
+
 export interface Step {
-    ID?: string,
-    interval: {
-        unit: string,
-        value: number
-    },
-    duration: {
-        unit: string,
-        value: number
-    }
+    ID?: string
+    interval: Time
+    duration: Time
     postRef: string
 }

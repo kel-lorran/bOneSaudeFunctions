@@ -1,16 +1,19 @@
+import { FlowStep } from "../model/FlowStep";
 import { Post } from "../model/Post";
+var transformStepListToScheduleModel = require('../utils/transformStepListToScheduleModel')
 
 var admin = require("firebase-admin");
 var createPost = require('./createPost')
 
-var serviceAccount = require("../utils/cert/b-one-saude-firebase-adminsdk-8vmnq-227fedd0ff.json");
-var flowDataExample = require("./flowDataExample.json");
+var serviceAccount = require("../utils/cert/credential.json");
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+if (!admin.apps.length) {
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+    });
+}
 
-const fn = async () => {
+module.exports = async (flowData: any) => {
     const temp = admin
     .firestore()
     .collection("flow")
@@ -21,14 +24,28 @@ const fn = async () => {
         segment,
         startCondition,
         stepList
-    } = flowDataExample
+    } = flowData
 
-    const computedStepList = await Promise.all(stepList.map(async ({ postRef, post, ...restStep }) => {
+    const computedStepList = await Promise.all(stepList.map(async ({ postRef, post, ...restStep }: FlowStep) => {
         return {
             ...restStep,
             postRef: await createPost([post]).then((e: Post[]) => e[0].ID)
         }
     }))
+
+    const scheduleModelTemp = transformStepListToScheduleModel(computedStepList, startCondition)
+
+    const scheduleModelDoc = admin
+    .firestore()
+    .collection("scheduleModel")
+    .doc()
+
+    const scheduleModel = {
+        ID: scheduleModelDoc.id,
+        data: scheduleModelTemp
+    }
+
+    await scheduleModelDoc.set(scheduleModel)
 
     return temp.set({
         ID: temp.id,
@@ -36,8 +53,6 @@ const fn = async () => {
         segment,
         startCondition,
         stepList: computedStepList,
-        scheduleModel: null
+        scheduleModel
     })
 }
-
-module.exports = fn
