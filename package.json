@@ -8,9 +8,10 @@
     "createSIS": "ts-node ./src/PreProcessing/createSISData",
     "createSegment": "ts-node ./src/PreProcessing/createSegments",
     "createFlow": "ts-node ./src/Client/runCreateFlow",
-    "createPostList": "ts-node ./src/PreProcessing/createPost",
+    "createPostListForAll": "ts-node ./src/Client/runCreatePostFeedGeral",
     "createPatientSyncSIS": "ts-node ./src/Client/runPatient",
     "applyScheduleModel": "ts-node ./src/PosProcessing/runApplyScheduleModelByFlow.ts",
+    "sendNotificationServer": "ts-node ./src/PosProcessing/sendNotification.ts",
     "createFirestoreBackup": "npx -p node-firestore-import-export firestore-export -a ./src/utils/cert/temp.json -b backup.json",
     "uploadDataFromBackup": "npx -p node-firestore-import-export firestore-import -a ./src/utils/cert/temp.json -b backup.json"
   },
