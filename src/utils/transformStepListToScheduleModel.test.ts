@@ -24,19 +24,19 @@ describe('util function transformStepListToScheduleModel', () => {
         expect(transformStepListToScheduleModel(stepListExample, startCondition)).toEqual([
             {
                 status: 'initial',
-                date: '',
+                date: 0,
                 dateRelative: 604800000 * 4,
                 postRef: "upbvIqgPZJL4xfRX02j0"
             },
             {
                 status: 'initial',
-                date: '',
+                date: 0,
                 dateRelative: 604800000 * 8,
                 postRef: "upbvIqgPZJL4xfRX02j0" 
             },
             {
                 status: 'initial',
-                date: '',
+                date: 0,
                 dateRelative: 604800000 * 11,
                 postRef: "upbvIqgPZJL4xfRX02j0"
             }
@@ -79,13 +79,13 @@ describe('util function transformStepListToScheduleModel', () => {
         expect(transformStepListToScheduleModel(stepListExample, startCondition)).toEqual([
             {
                 status: 'initial',
-                date: '',
+                date: 0,
                 dateRelative: 604800000 * 4,
                 postRef: "upbvIqgPZJL4xfRX02j0"
             },
             {
                 status: 'initial',
-                date: '',
+                date: 0,
                 dateRelative: 604800000 * 8,
                 postRef: "upbvIqgPZJL4xfRX02j0" 
             }

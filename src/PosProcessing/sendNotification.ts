@@ -1,5 +1,5 @@
-import { FlowStep } from "../model/FlowStep";
 import { Patient } from "../model/Patient";
+import { PatientFlowScheduleModel } from "../model/PatientFlowScheduleModel";
 import { Post } from "../model/Post";
 
 var admin = require("firebase-admin");
@@ -11,16 +11,16 @@ if (!admin.apps.length) {
   });
 }
 
-module.exports = async () => {
+(async () => {
   //get all PatientList
   const patientList = (
-    await admin.firestore().collection("patient").doc().get()
-  ).data();
+    await admin.firestore().collection("patient").get()
+  ).docs.map((e: any) => e.data());
 
   patientList.map(async (patient: Patient) => {
     let hasChange = false;
     await patient.scheduleModelRefList.map(async (scheduleModelRef) => {
-      const flowScheduleModel: FlowStep[] = (
+      const flowScheduleModel: PatientFlowScheduleModel = (
         await admin
           .firestore()
           .collection("patientFlowScheduleModel")
@@ -28,7 +28,7 @@ module.exports = async () => {
           .get()
       ).data();
 
-      const temptempflowScheduleModel = flowScheduleModel.map(async (e) => {
+      const newFlowScheduleModelData = await Promise.all(flowScheduleModel.data.map(async (e) => {
         const now = new Date().getTime();
         if (e.date < now) {
           if (patient.appTokenList?.length) {
@@ -51,14 +51,14 @@ module.exports = async () => {
           hasChange = true;
         }
         return e;
-      });
+      }));
       if (hasChange) {
         return admin
           .firestore()
           .collection("patientFlowScheduleModel")
           .doc(scheduleModelRef)
-          .set(temptempflowScheduleModel)
+          .set({ data: newFlowScheduleModelData }, { merge: true })
       }
     });
   });
-};
+})();

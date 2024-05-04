@@ -12,6 +12,8 @@ jest.mock('firebase-admin', () => {
 });
 admin as jest.Mock
 
+jest.mock('node:fs');
+
 describe('createSISData script test', () => {
   it('should call firestore many times when script run', () => {
     const fakeSetFn = jest.fn()
